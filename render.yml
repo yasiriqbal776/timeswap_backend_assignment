@@ -1,0 +1,24 @@
+services:
+  - type: worker
+    name: celery-worker
+    region: ohio
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A assignment worker --loglevel=debug --concurrency 1"
+    autoDeploy: true
+
+  - type: worker
+    name: celery-beat
+    region: ohio
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "celery -A assignment beat --loglevel=debug --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    autoDeploy: true
+
+  - type: web
+    name: app
+    region: ohio
+    runtime: python
+    buildCommand: "pip install -r requirements.txt && python manage.py migrate"
+    startCommand: "gunicorn assignment.wsgi:application --log-file -"
+    autoDeploy: true
