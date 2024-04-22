@@ -16,7 +16,7 @@ services:
     autoDeploy: true
 
   - type: web
-    name: app
+    name: assigment-pricing
     region: ohio
     runtime: python
     buildCommand: "pip install -r requirements.txt && python manage.py migrate"
