@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             name='PriceRecords',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('symbol', models.CharField(max_length=10)),
+                ('symbol', models.CharField(max_length=10, db_index=True)),
                 ('price_decimal', models.DecimalField(decimal_places=4, help_text='Normalized price of the currency', max_digits=19)),
                 ('price_raw', models.CharField(help_text='Original format of the price', max_length=255)),
                 ('timestamp', models.DateTimeField()),

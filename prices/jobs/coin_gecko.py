@@ -8,14 +8,13 @@ from prices.models import PriceRecords
 
 
 @shared_task
-def fetch_coin_gecko_data():
-    source = DataSources.objects.get(key='CoinGecko')
-    url = "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
+def fetch_data(source_id):
+    source = DataSources.objects.get(id=1)
 
     try:
         if not source:
             raise Exception('Data source not found')
-        response = requests.get(url)
+        response = requests.get(source.url)
         response.raise_for_status()  # will raise an exception for HTTP error codes
         data = response.json()
 

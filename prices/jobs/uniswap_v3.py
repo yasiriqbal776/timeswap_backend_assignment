@@ -12,10 +12,10 @@ from decimal import Decimal, getcontext
 
 
 @shared_task
-def fetch_uniswap_v3_data():
+def fetch_data(source_id):
 
     try:
-        source = DataSources.objects.get(key='UniSwap')
+        source = DataSources.objects.get(id=2)
 
         if not source:
             raise Exception('Data source not found')
